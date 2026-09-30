@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Payment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .payment-box {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        img {
+            width: 250px;
+            max-width: 100%;
+        }
+
+        .pay-button {
+            display: block;
+            background: #008000;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .receipt-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        .receipt-section input {
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .receipt-preview {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .receipt-preview img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+        }
+
+        .receipt-status {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .jotform-button {
+            background: #008000;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-box">
+
+    <h1>Food Order Payment</h1>
+
+    <p>Total Payment</p>
+
+    <p>Scan QR di bawah untuk membuat pembayaran.</p>
+
+    <!-- QR PAYMENT -->
+    <img src="qr.jpeg" alt="Payment QR">
+
+    <p>
+        Selepas pembayaran, sila upload resit pembayaran
+        sebelum kembali ke Jotform.
+    </p>
+
+    <!-- UPLOAD RESIT -->
+    <div class="receipt-section">
+
+        <h3>🧾 Upload Resit Pembayaran</h3>
+
+        <p>Pilih gambar atau PDF resit anda.</p>
+
+        <input type="file"
+               id="receipt"
+               name="receipt"
+               accept="image/*,.pdf"
+               onchange="previewReceipt()">
+
+        <div class="receipt-preview" id="preview">
+
+            <p><b>Preview Resit:</b></p>
+
+            <img id="receiptImage" alt="Preview Resit">
+
+        </div>
+
+        <p class="receipt-status" id="receiptStatus"></p>
+
+    </div>
+
+    <!-- KEMBALI KE JOTFORM -->
+    <a class="pay-button jotform-button"
+       href="https://app.jotform.com/262160423660449"
+       target="_blank"
+       onclick="checkReceipt(event)">
+       KEMBALI KE ORDER
+    </a>
+
+</div>
+
+
+<script>
+
+function previewReceipt() {
+
+    const input = document.getElementById("receipt");
+    const preview = document.getElementById("preview");
+    const image = document.getElementById("receiptImage");
+    const status = document.getElementById("receiptStatus");
+
+    if (input.files.length === 0) {
+        preview.style.display = "none";
+        status.innerHTML = "";
+        return;
+    }
+
+    const file = input.files[0];
+
+    status.innerHTML =
+        "✅ Resit dipilih: <b>" + file.name + "</b>";
+
+    status.style.color = "green";
+
+    /* Jika gambar */
+    if (file.type.startsWith("image/")) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            image.src = e.target.result;
+
+            preview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+    /* Jika PDF */
+    else if (file.type === "application/pdf") {
+
+        preview.style.display = "none";
+
+        status.innerHTML =
+            "✅ PDF resit dipilih: <b>" +
+            file.name +
+            "</b>";
+
+    }
+
+}
+
+
+function checkReceipt(event) {
+
+    const input = document.getElementById("receipt");
+    const status = document.getElementById("receiptStatus");
+
+    if (input.files.length === 0) {
+
+        event.preventDefault();
+
+        status.innerHTML =
+            "❌ Sila upload resit pembayaran terlebih dahulu.";
+
+        status.style.color = "red";
+
+        return false;
+    }
+
+    status.innerHTML =
+        "✅ Resit telah dipilih. Sila upload resit tersebut di ruangan Jotform.";
+
+    status.style.color = "green";
+
+}
+
+</script>
+
+</body>
+</html>
