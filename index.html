@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Payment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .payment-box {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        img {
+            width: 250px;
+            max-width: 100%;
+        }
+
+        .pay-button {
+            display: block;
+            background: #008000;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .receipt-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        .receipt-icon {
+            font-size: 35px;
+        }
+
+        .receipt-section h3 {
+            margin: 10px 0;
+        }
+
+        .receipt-section p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .jotform-button {
+            background: #008000;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-box">
+
+    <h1>Food Order Payment</h1>
+
+    <p>Total Payment</p>
+
+    <p>
+        Scan QR di bawah untuk membuat pembayaran.
+    </p>
+
+    <!-- QR PAYMENT -->
+    <img src="QR.jpeg" alt="Payment QR">
+
+    <p>
+        Selepas pembayaran, sila upload resit pembayaran
+        di halaman order.
+    </p>
+
+    <!-- RESIT -->
+    <div class="receipt-section">
+
+        <div class="receipt-icon">🧾</div>
+
+        <h3>Upload Resit Pembayaran</h3>
+
+        <p>
+            Selepas membuat pembayaran, tekan butang
+            di bawah untuk kembali ke borang order.
+        </p>
+
+        <p>
+            <b>Di dalam Jotform, sila upload gambar atau
+            PDF resit pembayaran anda.</b>
+        </p>
+
+    </div>
+
+    <!-- KEMBALI KE JOTFORM -->
+    <a class="pay-button jotform-button"
+       href="https://app.jotform.com/262228493309461"
+       target="_blank">
+
+       📤 UPLOAD RESIT & KEMBALI KE ORDER
+
+    </a>
+
+</div>
+
+</body>
+</html>
